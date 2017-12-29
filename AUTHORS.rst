@@ -13,6 +13,7 @@ Contributors
 - Aymeric Augustin <aymeric.augustin AT m4x.org>
 - Daniel Arbuckle <djarb AT highenergymagic.org>
 - David Creswick <dcrewi AT gyrae.net>
+- David Testé <soonum AT gnu.org>
 - Denya <denya.msk AT gmail.com>
 - Don Brown <mrdon AT twdata.org>
 - Martin Richard <martius AT martiusweb.net>

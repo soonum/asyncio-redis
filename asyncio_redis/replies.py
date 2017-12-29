@@ -196,13 +196,44 @@ class ConfigPairReply:
 class InfoReply:
     """ :func:`~asyncio_redis.RedisProtocol.info` reply. """
     def __init__(self, data):
-        self._data = data # TODO: implement parser logic
+        self._data = self._parse(data)
+
+    @property
+    def data(self):
+        """ Received info """
+        return self._data
+
+    def _parse(self, data):
+        info = {}
+        for line in data.split():
+            if not line.startswith(b"#"):
+                key, _, value = line.partition(b":")
+                info[key] = value
+
+        return info
 
 
 class ClientListReply:
     """ :func:`~asyncio_redis.RedisProtocol.client_list` reply. """
     def __init__(self, data):
-        self._data = data # TODO: implement parser logic
+        self._data = self._parse(data)
+
+    @property
+    def data(self):
+        """ Received client list """
+        return self._data
+
+    def _parse(self, data):
+        client_list = []
+        for line in data.splitlines():
+            pairs = line.split(b" ")
+            client_info = {}
+            print(pairs)
+            for pair in pairs:
+                client_info = dict(pair.split(b"=") for pair in pairs)
+            client_list.append(client_info)
+
+        return client_list
 
 
 class PubSubReply:
